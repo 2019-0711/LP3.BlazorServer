@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using LP3.BlazoServer.Domain.Entities;
 using MiProyectoAcademico.Domain.Enums;
 
 namespace MiProyectoAcademico.Domain.Entities

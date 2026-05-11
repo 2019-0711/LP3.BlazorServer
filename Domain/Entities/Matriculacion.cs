@@ -1,3 +1,5 @@
+using MiProyectoAcademico.Domain.Entities;
+
 namespace LP3.BlazoServer.Domain.Entities;
 
 public class Matriculacion

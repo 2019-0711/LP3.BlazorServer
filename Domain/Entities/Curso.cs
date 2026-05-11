@@ -1,3 +1,5 @@
+using LP3.BlazoServer.Domain.Entities;
+
 namespace MiProyectoAcademico.Domain.Entities
 {
     public class Curso
