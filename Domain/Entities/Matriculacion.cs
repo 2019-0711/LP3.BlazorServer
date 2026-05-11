@@ -1,6 +1,4 @@
-using MiProyectoAcademico.Domain.Entities.MiProyectoAcademico.Domain.Entities;
-
-namespace MiProyectoAcademico.Domain.Entities;
+namespace LP3.BlazoServer.Domain.Entities;
 
 public class Matriculacion
 {
