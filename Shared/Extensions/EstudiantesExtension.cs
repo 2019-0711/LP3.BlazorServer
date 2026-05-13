@@ -1,21 +1,29 @@
-namespace LP3.BlazorServer.Shared.Extensions
-{
-    using MiProyectoAcademico.Domain.Entities;
-    using MiProyectoAcademico.Shared.Dtos;
+namespace MiProyectoAcademico.Shared.Extensions;
 
-    public static class EstudiantesExtension
-    {
-        public static EstudianteDto ToDto(this Estudiante estudiante)
+using MiProyectoAcademico.Domain.Entities;
+
+/// <summary>
+/// Métodos de conversión entre Entidad y DTO.
+/// </summary>
+public static class EstudianteExtensions
+{
+    public static EstudianteDto ToDto(this Estudiante e)
+        => new()
         {
-            return new EstudianteDto
-            {
-                Id = estudiante.Id,
-                Nombre = estudiante.Nombre,
-                Apellido = estudiante.Apellido,
-                Matricula = estudiante.Matricula,
-                Email = estudiante.Email,
-                FechaIngreso = estudiante.FechaIngreso
-            };
-        }
-    }
+            Id        = e.Id,
+            Nombre    = e.Nombre,
+            Apellido  = e.Apellido,
+            Matricula = e.Matricula,
+            Estado    = e.Estado.ToString()
+        };
+
+    public static Estudiante ToEntity(this EstudianteFormDto dto)
+        => new()
+        {
+            Nombre    = dto.Nombre,
+            Apellido  = dto.Apellido,
+            Matricula = dto.Matricula,
+            Email     = dto.Email,
+            Estado    = dto.Estado
+        };
 }
