@@ -1,6 +1,7 @@
-namespace MiProyectoAcademico.Shared.Extensions;
+using LP3.BlazorServer.Domain.Entities;
+using LP3.BlazorServer.Shared.Dtos;
 
-using MiProyectoAcademico.Domain.Entities;
+namespace LP3.BlazorServer.Shared.Extensions;
 
 /// <summary>
 /// Métodos de conversión entre Entidad y DTO.

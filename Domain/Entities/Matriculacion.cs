@@ -1,4 +1,4 @@
-using MiProyectoAcademico.Domain.Entities;
+using LP3.BlazorServer.Domain.Entities;
 
 namespace LP3.BlazoServer.Domain.Entities;
 

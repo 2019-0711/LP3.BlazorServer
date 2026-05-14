@@ -1,4 +1,4 @@
-namespace MiProyectoAcademico.Domain.Enums
+namespace LP3.BlazorServer.Domain.Enums
 {
     public enum TipoDocumento
     {

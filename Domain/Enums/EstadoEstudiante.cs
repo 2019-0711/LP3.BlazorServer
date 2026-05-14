@@ -1,4 +1,4 @@
-namespace MiProyectoAcademico.Domain.Enums;
+namespace LP3.BlazorServer.Domain.Enums;
 
 public enum EstadoEstudiante
 {
@@ -6,11 +6,4 @@ public enum EstadoEstudiante
     Inactivo  = 2,
     Egresado  = 3,
     Suspendido = 4
-}
-
-public enum TipoDocumento
-{
-    Cedula   = 1,
-    Pasaporte = 2,
-    Licencia  = 3
 }

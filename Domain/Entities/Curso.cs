@@ -1,6 +1,6 @@
 using LP3.BlazoServer.Domain.Entities;
 
-namespace MiProyectoAcademico.Domain.Entities
+namespace LP3.BlazorServer.Domain.Entities
 {
     public class Curso
     {
