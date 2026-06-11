@@ -1,0 +1,284 @@
+@page "/cursos"
+@using LP3.BlazorServer.Shared.Dtos
+@inject ICursoService CursoService
+
+<h3>Cursos</h3>
+
+@if (!string.IsNullOrEmpty(mensaje))
+{ <div class="alert alert-info">@mensaje</div>
+}
+
+<hr />
+
+<h4>Busqueda por Codigo</h4>
+
+<div class="row mb-3">
+    <div class="col-md-4">
+        <InputText class="form-control" @bind-Value="codigoBusqueda" />
+    </div>
+
+```
+<div class="col-md-2">
+    <button class="btn btn-primary" @onclick="BuscarCurso">
+        Buscar
+    </button>
+</div>
+```
+
+</div>
+
+@if (cursoBuscado != null)
+{ <div class="alert alert-success">
+Curso encontrado: <strong>@cursoBuscado.Nombre</strong>
+(@cursoBuscado.Codigo) </div>
+}
+
+<hr />
+
+<h4>Crear Curso</h4>
+
+<EditForm Model="nuevoCurso" OnValidSubmit="CrearCurso">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+```
+<div class="mb-3">
+    <label>Nombre</label>
+    <InputText class="form-control"
+               @bind-Value="nuevoCurso.Nombre" />
+</div>
+
+<div class="mb-3">
+    <label>Codigo</label>
+    <InputText class="form-control"
+               @bind-Value="nuevoCurso.Codigo" />
+</div>
+
+<div class="mb-3">
+    <label>Créditos</label>
+    <InputNumber class="form-control"
+                 @bind-Value="nuevoCurso.Creditos" />
+</div>
+
+<button class="btn btn-success">
+    Crear
+</button>
+```
+
+</EditForm>
+
+<hr />
+
+<h4>Listado de Cursos</h4>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Codigo</th>
+            <th>Créditos</th>
+            <th>Activo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+```
+<tbody>
+    @foreach (var curso in cursos)
+    {
+        <tr>
+            <td>@curso.Id</td>
+            <td>@curso.Nombre</td>
+            <td>@curso.Codigo</td>
+            <td>@curso.Creditos</td>
+            <td>@curso.Activo</td>
+
+            <td>
+                <button class="btn btn-warning btn-sm"
+                        @onclick="() => SeleccionarEdicion(curso)">
+                    Editar
+                </button>
+
+                <button class="btn btn-danger btn-sm"
+                        @onclick="() => ConfirmarEliminar(curso)">
+                    Eliminar
+                </button>
+            </td>
+        </tr>
+    }
+</tbody>
+```
+
+</table>
+
+@if (cursoEditar != null)
+{ <div class="card mt-4"> <div class="card-header">
+Editar Curso </div>
+
+```
+    <div class="card-body">
+
+        <EditForm Model="cursoEditar"
+                  OnValidSubmit="GuardarEdicion">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="mb-3">
+                <label>Nombre</label>
+                <InputText class="form-control"
+                           @bind-Value="cursoEditar.Nombre" />
+            </div>
+
+            <div class="mb-3">
+                <label>Codigo</label>
+                <InputText class="form-control"
+                           @bind-Value="cursoEditar.Codigo" />
+            </div>
+
+            <div class="mb-3">
+                <label>Créditos</label>
+                <InputNumber class="form-control"
+                             @bind-Value="cursoEditar.Creditos" />
+            </div>
+
+            <div class="form-check mb-3">
+                <InputCheckbox class="form-check-input"
+                               @bind-Value="cursoEditar.Activo" />
+
+                <label class="form-check-label">
+                    Activo
+                </label>
+            </div>
+
+            <button class="btn btn-primary">
+                Guardar
+            </button>
+        </EditForm>
+
+    </div>
+</div>
+
+}
+
+@if (cursoEliminar != null)
+{ <div class="card mt-4 border-danger"> <div class="card-header bg-danger text-white">
+Confirmar eliminación </div>
+
+```
+    <div class="card-body">
+
+        <p>
+            ¿Desea eliminar el curso
+            <strong>@cursoEliminar.Nombre</strong>?
+        </p>
+
+        <button class="btn btn-danger"
+                @onclick="EliminarCurso">
+            Sí, Eliminar
+        </button>
+
+        <button class="btn btn-secondary"
+                @onclick="CancelarEliminar">
+            Cancelar
+        </button>
+
+    </div>
+</div>
+
+}
+
+@code {
+
+private List<CursoDto> cursos = new();
+
+private CursoFormDto nuevoCurso = new();
+
+private CursoDto? cursoBuscado;
+
+private string codigoBusqueda = "";
+
+private string mensaje = "";
+
+private CursoFormDto? cursoEditar;
+
+private CursoDto? cursoEliminar;
+
+protected override async Task OnInitializedAsync()
+{
+    await CargarCursos();
+}
+
+private async Task CargarCursos()
+{
+    cursos = (await CursoService.GetAll()).ToList();
+}
+
+private async Task BuscarCurso()
+{
+    cursoBuscado =
+        await CursoService.GetByCodigoAsync(codigoBusqueda);
+}
+
+private async Task CrearCurso()
+{
+    if (await CursoService.CreateAsync(nuevoCurso))
+    {
+        mensaje = "Curso creado correctamente";
+
+        nuevoCurso = new();
+
+        await CargarCursos();
+    }
+}
+
+private void SeleccionarEdicion(CursoDto curso)
+{
+    cursoEditar = new CursoFormDto
+    {
+        Id = curso.Id,
+        Nombre = curso.Nombre,
+        Codigo = curso.Codigo,
+        Creditos = curso.Creditos,
+        Activo = curso.Activo
+    };
+}
+
+private async Task GuardarEdicion()
+{
+    if (cursoEditar != null)
+    {
+        await CursoService.UpdateAsync(
+            cursoEditar.Id!.Value,
+            cursoEditar);
+
+        cursoEditar = null;
+
+        await CargarCursos();
+    }
+}
+
+private void ConfirmarEliminar(CursoDto curso)
+{
+    cursoEliminar = curso;
+}
+
+private async Task EliminarCurso()
+{
+    if (cursoEliminar != null)
+    {
+        await CursoService.DeleteAsync(cursoEliminar.Id);
+
+        cursoEliminar = null;
+
+        await CargarCursos();
+    }
+}
+
+private void CancelarEliminar()
+{
+    cursoEliminar = null;
+}
+
+}
