@@ -58,3 +58,127 @@ h1:focus {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+/* ===== FONDO GENERAL ===== */
+body {
+    background: linear-gradient(135deg, #1a001f, #4b0082, #9d4edd);
+    min-height: 100vh;
+    color: white;
+}
+
+/* ===== ENCABEZADOS ===== */
+h1, h2, h3, h4, h5, h6 {
+    color: white;
+    font-weight: bold;
+}
+
+/* ===== TARJETAS ===== */
+.card {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+}
+
+/* ===== TABLAS ===== */
+.table {
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: linear-gradient(to right, #4b0082, #9d4edd);
+    color: white;
+}
+
+/* ===== BOTONES ===== */
+.btn-primary {
+    background: linear-gradient(to right, #5a189a, #9d4edd);
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(to right, #7209b7, #c77dff);
+    border: none;
+}
+
+.btn-warning {
+    background: linear-gradient(to right, #9d4edd, #e0aaff);
+    color: white;
+    border: none;
+}
+
+.btn-danger {
+    background: linear-gradient(to right, #6a040f, #d00000);
+    border: none;
+}
+
+/* ===== CAJAS DE TEXTO ===== */
+.form-control {
+    border-radius: 12px;
+    border: 2px solid #9d4edd;
+}
+
+.form-control:focus {
+    border-color: #c77dff;
+    box-shadow: 0 0 10px rgba(199,125,255,.5);
+}
+
+/* ===== MENÚ LATERAL ===== */
+.sidebar {
+    background: linear-gradient(to bottom, #1a001f, #4b0082);
+}
+
+/* ===== ALERTAS ===== */
+.alert {
+    border-radius: 12px;
+}
+
+/* ===== ENLACES ===== */
+a {
+    color: #e0aaff;
+}
+
+a:hover {
+    color: white;
+}
+
+/* MENÚ LATERAL */
+.nav-scrollable {
+background: linear-gradient(180deg, #1a001f, #4b0082, #9d4edd);
+}
+
+/* ENLACES */
+.nav-link {
+color: white !important;
+border-radius: 12px;
+margin: 4px;
+transition: all .3s;
+}
+
+/* EFECTO AL PASAR EL MOUSE */
+.nav-link:hover {
+background: rgba(255,255,255,.15);
+transform: translateX(5px);
+}
+
+/* OPCIÓN SELECCIONADA */
+.nav-link.active {
+background: linear-gradient(to right, #7209b7, #c77dff);
+color: white !important;
+}
+
+/* BARRA SUPERIOR */
+.top-row {
+background: linear-gradient(to right, #1a001f, #4b0082);
+}
+
+/* NOMBRE DEL SISTEMA */
+.navbar-brand {
+color: white !important;
+font-weight: bold;
+font-size: 1.3rem;
+}
