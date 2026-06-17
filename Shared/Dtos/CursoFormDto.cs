@@ -13,7 +13,7 @@ public class CursoFormDto
     public string Codigo { get; set; } = string.Empty;
 
     [Required]
-    [Range(1, 10, ErrorMessage = "Los créditos deben estar entre 1 y 10.")]
+    [Range(1, 18, ErrorMessage = "Los créditos deben estar entre 1 y 18.")]
     public int Creditos { get; set; }
 
     public bool Activo { get; set; } = true;
